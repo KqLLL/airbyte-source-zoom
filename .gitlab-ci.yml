@@ -1,0 +1,32 @@
+stages:
+  - build
+
+include:
+  - project: devops/ci-templates
+    file: /templates/build/buildah.yml
+
+.build:
+  stage: build
+  extends: .buildah_build
+  variables:
+    NO_PUSH: "false"
+  script:
+    - IMAGE=${AWS_ECR_REGISTRY_DOMAIN}/right/airbyte-source-zoom
+    - IMAGE_LATEST=$IMAGE:latest
+    - IMAGE_COMMIT_VERSION=$IMAGE:${CI_COMMIT_SHORT_SHA}
+    - buildah bud -t ${IMAGE_COMMIT_VERSION} .
+    - buildah tag ${IMAGE_COMMIT_VERSION} ${IMAGE_LATEST}
+    - test "$NO_PUSH" = "false" && buildah push ${IMAGE_COMMIT_VERSION} && buildah push ${IMAGE_LATEST}
+    - echo "The image name:${IMAGE_COMMIT_VERSION}"
+
+build:
+  extends: .build
+  only:
+    - master
+
+build test:
+  variables:
+    NO_PUSH: "true"
+  extends: .build
+  except:
+    - master

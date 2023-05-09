@@ -1,0 +1,7 @@
+.idea/
+venv
+secrets
+airbyte_source_zoom.egg-info
+*.sqlite
+meeting_cache.json
+airbyte_source_zoom/__pycache__/

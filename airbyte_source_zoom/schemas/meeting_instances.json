@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "properties": {
+    "meeting_id": {
+      "type": "number"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "start_time": {
+      "type": "string"
+    },
+    "host_id": {
+      "type": "string"
+    },
+    "timezone": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "type": {
+      "type": "number"
+    }
+  },
+  "required": []
+}

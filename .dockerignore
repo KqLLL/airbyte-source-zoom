@@ -1,0 +1,6 @@
+*
+!Dockerfile
+!main.py
+!airbyte_source_zoom
+!setup.py
+!secrets
